@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+ 
+<html>
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+    <title>product</title>
+    
+</head>
+<body>
+    <div id ='main_body'>
+
+        <div id = 'leftzone'>
+            <div id = 'leftlogozone'>
+                <img src="/uploads/pandalogo.jpg" style="width:200px; height: 40px;"/>
+            </div>
+
+      
+            <div id ='idzone'>
+                <div id = "imgzone">
+                <img src="/uploads/tree.png" style="width:60px; height: 60px;"/>
+                </div>
+                <div id = "txtzone">
+                <p>hello <%= paramID %> !!!</p>
+                <p>point <%= paramPoint %> </p>
+                </div>
+            </div>
+
+            <div id = 'buttonzone'>
+
+                <form method="post" action="/api/process/main">
+                <button id="but2">Main</button>
+                </form>
+
+                <form method="post" action="/api/process/share">
+                <button id="but2">Share</button>
+                </form>
+
+                <form method="post" action="/api/process/mydata">
+                <button id="but2">mydata</button>
+                </form>
+
+                <button id="but2">AI recommend</button>
+
+                <button id="but2">Solution</button>
+
+                <div id = 'writelogout'>
+                    <hr id= "hrid">
+                    <form method="post" action="/api/process/go_write">
+                        <button id ='but2'>Write</button>
+                    </form>
+    
+                    <form method="post" action="/api/process/logout">
+                    <button id="but2">Logout</button>
+                </form>
+                </div>
+            </div>
+        </div>
+
+
+            <div id ='rightzone'>
+
+                <div id = 'rightlogozone'>
+
+                    <div id = "search">
+                        <td><label><img src="/uploads/search.svg" style="width:20px; height: 20px;"/> </label></td>
+                        <td><input id= "searchzone" type="text" name="passwords"></td>
+                        </div>
+                 
+                </div>
+
+                <h1><%= title %></h1>
+                <p>Welcome to <%= title %></p>
+
+                <% if(data !== null){ 
+                    for( var i=0; i < data.length; i++){ 
+                        if( docs._id == data[i].dataid) {%>
+
+                            <form method="get" action="/api/mydatadelete/<%= data[i]._id%>">
+
+                            <button>delete mydata</button>
+                            </form>
+
+
+
+                        <% } else {%>
+
+                            <form method="post" action="/api/process/addmydata/">
+
+                                <div id= 'hidden'>
+                                    <input type="text" name="datatitle" value="<%=docs.title%>">
+                                    <input type="text" name="dataid" value="<%=docs._id%>">
+                                    <input type="text" name="datathumbnail" value="<%=docs.thumbnail%>">
+                                    <input type="text" name="datawriter" value="<%=docs.writername%>">
+                                </div>
+                                <button>addmydata</button>
+                            </form>
+
+                <% }}} %>            
+
+                <% if(data == "") { %>           
+                <form method="post" action="/api/process/addmydata/">
+
+                    <div id= 'hidden'>
+                        <input type="text" name="datatitle" value="<%=docs.title%>">
+                        <input type="text" name="dataid" value="<%=docs._id%>">
+                        <input type="text" name="datathumbnail" value="<%=docs.thumbnail%>">
+                        <input type="text" name="datawriter" value="<%=docs.writername%>">
+                    </div>
+                    <button>addmydata</button>
+                </form>
+                <% } %>
+               
+                <% if(docs.thumbnail){%>
+                <p>
+                <img src="/uploads/<%= docs.thumbnail %>" style="max-width: 100%"/>
+                </p>
+                <% } %>
+
+
+                <h1>제목 : <%=docs.title%> 
+                  작성자 : <%=docs.writername%> 
+                   내용 : <%=docs.contents%> </h1>
+                  <% if(paramID==docs.writername){%> 
+                    <form method="post" action="/delete/<%= docs._id%>">
+                   <button>delete</button></form> <%}%>
+ 
+
+                   <a href = "/uploads/<%= docs.thumbnail %>" download="다운로드받기">
+                    <button>파일다운로드</button>  
+                   </a>
+            </div>
+               
+
+
+        </div>
+    
+        
+   
+ 
+    
+
+
+    </div>
+</body>
+</html>

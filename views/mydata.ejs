@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+ 
+<html>
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+    <title>product</title>
+    
+</head>
+<body>
+    <div id ='main_body'>
+
+        <div id = 'leftzone'>
+            <div id = 'leftlogozone'>
+                <img src="/uploads/pandalogo.jpg" style="width:200px; height: 40px;"/>
+            </div>
+
+        
+            <div id ='idzone'>
+                <div id = "imgzone">
+                <img src="/uploads/tree.png" style="width:60px; height: 60px;"/>
+                </div>
+                <div id = "txtzone">
+                <p>hello <%= paramID %> !!!</p>
+                <p>point <%= paramPoint %> </p>
+                </div>
+            </div>
+
+            <div id = 'buttonzone'>
+
+                <form method="post" action="/api/process/main">
+                <button id="but2">Main</button>
+                </form>
+
+                <form method="post" action="/api/process/share">
+                <button id="but2">Share</button>
+                </form>
+
+                <form method="post" action="/api/process/mydata">
+                <button id="but1">mydata</button>
+                </form>
+
+                <button id="but2">AI recommend</button>
+
+                <button id="but2">Solution</button>
+
+                <div id = 'writelogout'>
+                    <hr id= "hrid">
+                    <form method="post" action="/api/process/go_write">
+                        <button id ='but2'>Write</button>
+                    </form>
+    
+                    <form method="post" action="/api/process/logout">
+                    <button id="but2">Logout</button>
+                </form>
+                </div>
+
+            </div>
+        </div>
+
+
+            <div id ='rightzone'>
+
+                <div id = 'rightlogozone'>
+
+                    <div id = "search">
+                        <td><label><img src="/uploads/search.svg" style="width:20px; height: 20px;"/> </label></td>
+                        <td><input id= "searchzone" type="text" name="passwords"></td>
+                        </div>
+         
+                </div>
+                <div id = 'mydisplaydata'> 
+
+                <% if (data !== null){
+                    for(var i = 0; i < data.length; i++) { %>
+                       
+                        <div class ='contents_box'>
+
+                        <a href="/api/docs/<%= data[i].dataid%>">
+                           
+                            <% if (data[i].thumbnail2) { %>
+                                <img src="/uploads/<%= data[i].thumbnail2 %>" style="width: 100%; height: 200px;"/>
+                            <% } %>
+
+                             <% if (data[i].thumbnail2 == "") { %>   
+                                <img src="/uploads/default.jpeg" style="width: 100%; height: 200px;"/>
+                             <% } %>   
+
+                            <p class ='datatitle'><%=data[i].title2%></p>
+                            <p class ='writername'> 작성자 <%=data[i].writername2%></p>
+                        </a>
+                        
+                        <form method="get" action="/api/mydatadelete/<%= data[i]._id%>">
+
+                            <button>delete mydata</button>
+                        </form>
+                    </div>
+                <%  }} %>
+
+                </div>
+            
+
+
+                
+            </div>
+        </div>
+    
+        
+   
+ 
+    
+
+
+    </div>
+</body>
+</html>
+
